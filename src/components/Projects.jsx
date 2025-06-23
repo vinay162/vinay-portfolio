@@ -155,9 +155,9 @@ function Projects() {
           </div>
         </div>
 
-      </div>
-    </section>
-  );
+  //     </div>
+  //   </section>
+  // );
 }
 
 export default Projects;
