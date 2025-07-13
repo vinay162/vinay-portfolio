@@ -8,7 +8,7 @@ import {
 import { CiUser } from "react-icons/ci";
 
 const techStack = [
-  { name: "FlutterFlow", icon: <SiFlutter className="text-6xl text-[#027DFD]" /> }, // Flutter Blue (Sky Blue)
+  { name: "Flutter", icon: <SiFlutter className="text-6xl text-[#027DFD]" /> }, // Flutter Blue (Sky Blue)
   { name: "Firebase", icon: <SiFirebase className="text-6xl text-[#FFCA28]" /> }, // Firebase Yellow (primary flame color)
   { name: "Python", icon: <SiPython className="text-6xl text-[#306998]" /> }, // Python Blue
   { name: "JavaScript", icon: <SiJavascript className="text-6xl text-[#F7DF1E]" /> }, // JavaScript Yellow
