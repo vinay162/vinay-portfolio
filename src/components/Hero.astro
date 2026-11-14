@@ -1,0 +1,45 @@
+---
+import { site } from '../data/site';
+---
+<div class="hero">
+  <h1>
+    <span class="name display">{site.name}</span>
+    <span class="role">{site.role}</span>
+  </h1>
+  <p class="lede" set:html={site.lede} />
+  <div class="actions">
+    <a class="btn btn-pop" href={site.resumePath}>Download resume (PDF)</a>
+    <a class="btn btn-quiet" href={`mailto:${site.email}`}>Email</a>
+  </div>
+</div>
+
+<style>
+  .hero { padding: 64px 0 96px; }
+  h1 { margin: 0; font-weight: 650; }
+  .name { display: block; font-size: clamp(3rem, 9vw, 6rem); }
+  .role {
+    display: block;
+    max-width: 26ch;
+    margin-top: 20px;
+    font-size: clamp(1.5rem, 3.3vw, 2.375rem);
+    font-weight: 500;
+    font-stretch: 92%;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+  .lede {
+    max-width: 56ch;
+    margin: 24px 0 0;
+    font-size: 1.1875rem;
+    line-height: 1.5;
+    color: var(--on-ink-muted);
+  }
+  .lede :global(b) { color: var(--on-ink); font-weight: 550; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+  @media (max-width: 800px) {
+    .hero { padding: 36px 0 64px; }
+    .role { margin-top: 14px; }
+    .lede { font-size: 1.0625rem; }
+  }
+</style>

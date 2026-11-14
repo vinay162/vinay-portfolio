@@ -1,0 +1,52 @@
+---
+interface Row {
+  title: string;
+  text: string;
+  /** Date range. When present the row leads with it. */
+  when?: string;
+}
+
+interface Props {
+  items: Row[];
+}
+
+const { items } = Astro.props;
+const dated = items.some((item) => item.when);
+---
+<ul class:list={['rows', { dated }]}>
+  {items.map((item) =>
+    dated ? (
+      <li>
+        <span class="when">{item.when}</span>
+        <div>
+          <b>{item.title}</b>
+          <span>{item.text}</span>
+        </div>
+      </li>
+    ) : (
+      <li>
+        <b>{item.title}</b>
+        <span>{item.text}</span>
+      </li>
+    ),
+  )}
+</ul>
+
+<style>
+  .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  li {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: 4px 40px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dated li { grid-template-columns: 13rem minmax(0, 1fr); }
+  b { display: block; font-weight: 600; }
+  span { color: var(--muted); }
+  .when { font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 800px) {
+    li, .dated li { grid-template-columns: 1fr; }
+  }
+</style>

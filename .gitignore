@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local design mocks and tooling scratch
+directions/
+.superpowers/
+.astro/
+
+# Local-only extra build checks
+.private-checks.json

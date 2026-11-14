@@ -1,0 +1,35 @@
+---
+// The navy band that closes a project page: where to go next, and the
+// project's main outside link.
+
+interface Props {
+  /** The next project by order, or nothing when this is the only one. */
+  next?: { title: string; href: string };
+  outside?: { label: string; url: string };
+}
+
+const { next, outside } = Astro.props;
+---
+<nav class="band-ink next" aria-label="More projects">
+  <div class="wrap">
+    <div>
+      <span>{next ? 'Next project' : 'More'}</span>
+      <a class="heading onward" href={next ? next.href : '/#projects'}>{next ? next.title : 'All projects'}</a>
+    </div>
+    {outside && (
+      <div>
+        <span>Elsewhere</span>
+        <a class="heading" href={outside.url}>{outside.label}</a>
+      </div>
+    )}
+  </div>
+</nav>
+
+<style>
+  .next { padding: 44px 0 56px; }
+  .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+  span { display: block; color: var(--on-ink-muted); font-size: 0.9375rem; }
+  a { font-size: 1.5rem; }
+  a:hover { color: var(--on-ink-hover); }
+  .onward { text-decoration-color: var(--pop); text-decoration-thickness: 3px; text-underline-offset: 0.16em; }
+</style>

@@ -1,0 +1,166 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Flow from '../../components/Flow.astro';
+import NextProject from '../../components/NextProject.astro';
+import { splitSections } from '../../lib/sections';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+    (a, b) => a.data.order - b.data.order,
+  );
+  return entries.map((entry, index) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      // Wraps round to the first project. Nothing when this is the only one.
+      next: entries.length > 1 ? entries[(index + 1) % entries.length] : undefined,
+    },
+  }));
+}
+
+const { entry, next } = Astro.props;
+const { title, summary, facts, links, screenshot, flow } = entry.data;
+const sections = splitSections(entry.rendered?.html ?? '');
+const primary = links.find((link) => link.primary) ?? links[0];
+---
+<Base title={`${title}, a project by ${site.name}`} description={summary} ogType="article">
+  <div class="band-ink">
+    <div class="wrap">
+      <Header />
+      <div class:list={['title-block', { 'has-shot': screenshot }]}>
+        <a class="back" href="/#projects">All projects</a>
+        <h1 class="display">{title}</h1>
+        <p class="lede">{summary}</p>
+        {primary && (
+          <div class="actions">
+            <a class="btn btn-pop" href={primary.url}>{primary.cta ?? primary.label}</a>
+          </div>
+        )}
+        {facts.length > 0 && (
+          <dl class="facts">
+            {facts.map((fact) => (
+              <div>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <main id="main" class="project-page">
+    {screenshot && (
+      <div class="wrap">
+        <figure class="shot">
+          <a href={screenshot.src} aria-label="Open the screenshot at full size">
+            <img src={screenshot.src} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} />
+          </a>
+          <figcaption>{screenshot.caption}</figcaption>
+        </figure>
+      </div>
+    )}
+
+    {sections.map((section, index) => (
+      <section class:list={['section', index % 2 === 0 ? 'band-paper' : 'band-sheet']}>
+        <div class="wrap part">
+          <h2 class="heading">{section.title}</h2>
+          <div class="prose">
+            {section.html && <Fragment set:html={section.html} />}
+            {section.panels.length > 0 && (
+              <ul class="panels">
+                {section.panels.map((panel) => (
+                  <li>
+                    <h3>{panel.title}</h3>
+                    <Fragment set:html={panel.html} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {flow && section.title === 'How it works' && (
+            <div class="full">
+              <Flow steps={flow.steps} caption={flow.caption} />
+            </div>
+          )}
+        </div>
+      </section>
+    ))}
+
+    <NextProject
+      next={next && { title: next.data.title, href: `/projects/${next.id}/` }}
+      outside={primary && { label: primary.label, url: primary.url }}
+    />
+  </main>
+</Base>
+
+<style>
+  /* Title band */
+  .title-block { padding: 36px 0 72px; }
+  .title-block.has-shot { padding-bottom: 150px; } /* room for the screenshot to overlap */
+  .back { color: var(--on-ink-muted); font-size: 0.9375rem; }
+  .back:hover { color: var(--on-ink); }
+  h1 { margin: 18px 0 0; font-size: clamp(3rem, 9vw, 6rem); }
+  .lede { max-width: 54ch; margin: 22px 0 0; font-size: 1.25rem; line-height: 1.5; color: var(--on-ink-muted); }
+  .actions { margin-top: 30px; }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 40px;
+    margin: 40px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--ink-rule);
+  }
+  dt { color: var(--on-ink-muted); font-size: 0.9375rem; }
+  dd { margin: 2px 0 0; font-weight: 550; }
+
+  /* Screenshot, overlapping the bottom edge of the title band */
+  .shot { margin: -110px 0 0; }
+  .shot img { display: block; width: 100%; background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; }
+  .shot figcaption { margin-top: 12px; color: var(--muted); font-size: 0.9375rem; }
+
+  /* Sections: heading on the left, content on the right */
+  .section { padding: 72px 0 80px; }
+  .part { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 16px 48px; }
+  .part > * { min-width: 0; }
+  h2 { margin: 0; font-size: clamp(1.75rem, 3.4vw, 2.25rem); }
+  .full { grid-column: 1 / -1; margin-top: 20px; }
+
+  .panels { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+  .panels li { padding: 22px 24px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; }
+  .band-sheet .panels li { background: var(--paper); }
+  .panels h3 { margin: 0 0 6px; font-size: 1.1875rem; font-weight: 650; }
+
+  @media (max-width: 800px) {
+    .title-block { padding: 16px 0 52px; }
+    .title-block.has-shot { padding-bottom: 84px; }
+    .lede { font-size: 1.0625rem; }
+    .facts { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+    .shot { margin-top: -56px; }
+    .section { padding: 52px 0 60px; }
+    .part { grid-template-columns: 1fr; }
+    .panels li { padding: 18px; }
+  }
+</style>
+
+<style is:global>
+  /* Content that comes from a project's Markdown file */
+  .project-page .prose { line-height: 1.6; }
+  .project-page .prose p { max-width: 62ch; margin: 0 0 16px; }
+  .project-page .prose p:last-child { margin-bottom: 0; }
+  .project-page .prose a { color: var(--accent); }
+  .project-page .prose small { color: var(--muted); font-size: 0.9375rem; }
+
+  .project-page .table-wrap { margin: 8px 0 16px; overflow-x: auto; }
+  .project-page table { width: 100%; min-width: 30rem; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .project-page th,
+  .project-page td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+  .project-page th { color: var(--muted); font-size: 0.9375rem; font-weight: 500; }
+  .project-page th[align="right"],
+  .project-page td[align="right"] { padding-right: 28px; text-align: right; }
+  .project-page td small { display: block; }
+</style>

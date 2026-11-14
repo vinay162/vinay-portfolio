@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Rows from '../components/Rows.astro';
+import Contact from '../components/Contact.astro';
+import { site } from '../data/site';
+
+const published = await getCollection('projects', ({ data }) => !data.draft);
+
+// Projects with their own page, plus those still waiting for one, in one ordered list.
+const cards = [
+  ...published.map((entry) => ({
+    order: entry.data.order,
+    title: entry.data.title,
+    summary: entry.data.summary,
+    stack: entry.data.stack,
+    note: entry.data.note,
+    href: `/projects/${entry.id}/`,
+    links: entry.data.links.map(({ label, url }) => ({ label, url })),
+    figures: entry.data.figures,
+  })),
+  ...site.upcoming.map((project) => ({ ...project, href: undefined })),
+].sort((a, b) => a.order - b.order);
+
+// Structured data: tells search engines and AI tools who this site is about.
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.jobTitle,
+  description: site.about.summary,
+  url: new URL('/', Astro.site).href,
+  email: `mailto:${site.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Mumbai', addressCountry: 'IN' },
+  sameAs: [site.links.linkedin, site.links.github],
+  knowsAbout: site.about.skills,
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'NMIMS Mumbai' },
+  worksFor: { '@type': 'Organization', name: 'Spoton Fintech' },
+};
+---
+<Base title={site.title} description={site.description}>
+  <script type="application/ld+json" slot="head" is:inline set:html={JSON.stringify(person)} />
+  <div class="band-ink">
+    <div class="wrap">
+      <Header home />
+      <Hero />
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="band-paper section" id="projects">
+      <div class="wrap">
+        <h2 class="section-title heading">Projects</h2>
+        <div class="projects">
+          {cards.map((card) => <ProjectCard {...card} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="band-sheet section">
+      <div class="wrap">
+        <h2 class="section-title heading">Other work</h2>
+        <Rows items={site.otherWork} />
+      </div>
+    </section>
+
+    <section class="band-paper section" id="experience">
+      <div class="wrap">
+        <h2 class="section-title heading">Experience</h2>
+        <Rows items={site.experience} />
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+</Base>
+
+<style>
+  .projects { display: grid; gap: 20px; }
+</style>

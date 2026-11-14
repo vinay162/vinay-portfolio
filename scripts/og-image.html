@@ -1,0 +1,41 @@
+<!doctype html>
+<!--
+  Source for public/og.png, the image shown when the site is shared on
+  LinkedIn, WhatsApp and similar. To regenerate after a change, screenshot
+  this page at exactly 1200 x 630 with a headless browser, for example:
+
+    chrome --headless=new --hide-scrollbars --window-size=1200,630 \
+      --screenshot=public/og.png scripts/og-image.html
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: "Bricolage Grotesque Variable";
+    font-weight: 200 800;
+    font-stretch: 75% 100%;
+    src: url("../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2") format("woff2-variations");
+  }
+  html, body { margin: 0; width: 1200px; height: 630px; }
+  body {
+    box-sizing: border-box;
+    padding: 84px 88px;
+    background: #0E1B2E;
+    color: #FFFFFF;
+    font-family: "Bricolage Grotesque Variable", "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .name { font-size: 132px; font-weight: 650; font-stretch: 87%; letter-spacing: -0.035em; line-height: 0.98; }
+  .role { margin-top: 30px; max-width: 900px; font-size: 50px; font-weight: 500; font-stretch: 92%; letter-spacing: -0.015em; line-height: 1.15; }
+  .bar { width: 120px; height: 10px; margin-top: 52px; background: #FF6B1A; border-radius: 5px; }
+</style>
+</head>
+<body>
+  <div class="name">Vinay Purohit</div>
+  <div class="role">Software Engineer who builds apps from start to finish</div>
+  <div class="bar"></div>
+</body>
+</html>

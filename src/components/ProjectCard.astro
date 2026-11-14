@@ -1,0 +1,83 @@
+---
+import type { CardLink, Figure } from '../data/site';
+
+interface Props {
+  title: string;
+  summary: string;
+  stack: string;
+  note?: string;
+  /** Link to the project's own page, when it has one. */
+  href?: string;
+  links: CardLink[];
+  figures: Figure[];
+}
+
+const { title, summary, stack, note, href, links, figures } = Astro.props;
+const hasLinks = Boolean(href) || links.length > 0;
+---
+<article class="project">
+  <div>
+    <h3>{title}</h3>
+    <p>{summary}</p>
+    <p class="stack">{stack}{note && ` ${note}`}</p>
+    {hasLinks && (
+      <p class="links">
+        {href && <a class="more" href={href}>View project</a>}
+        {links.map((link) => <a href={link.url}>{link.label}</a>)}
+      </p>
+    )}
+  </div>
+  <div class="figures">
+    {figures.map((figure) => (
+      <div>
+        <span class="value">{figure.value}</span>
+        <span class="label">{figure.label}</span>
+      </div>
+    ))}
+  </div>
+</article>
+
+<style>
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 24px 48px;
+    align-items: start;
+    padding: 32px;
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+  }
+  h3 { margin: 0 0 10px; font-size: 1.625rem; font-weight: 650; line-height: 1.2; letter-spacing: -0.015em; }
+  p { margin: 0; max-width: 54ch; }
+  .stack { margin-top: 12px; color: var(--muted); font-size: 0.9375rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 18px; }
+  .links a { color: var(--muted); }
+  .links a:hover { color: var(--accent); }
+  .links .more { color: var(--accent); font-weight: 600; }
+
+  .figures {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 28px;
+    padding: 22px 24px;
+    background: var(--tint);
+    border-radius: 8px;
+  }
+  .value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 650;
+    font-stretch: 80%;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .label { display: block; margin-top: 6px; color: var(--muted); font-size: 0.9375rem; line-height: 1.4; }
+
+  @media (max-width: 800px) {
+    .project { grid-template-columns: 1fr; padding: 22px 20px; }
+    .figures { padding: 18px 20px; }
+    .value { font-size: 1.625rem; }
+  }
+</style>

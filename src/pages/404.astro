@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+---
+<Base title="Page not found, Vinay Purohit" description="This page does not exist. The home page lists every project.">
+  <div class="band-ink page">
+    <div class="wrap">
+      <Header />
+      <main id="main">
+        <h1 class="display">Page not found</h1>
+        <p>This address does not match any page on the site.</p>
+        <a class="btn btn-pop" href="/">Go to the home page</a>
+      </main>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page { min-height: 100vh; }
+  main { padding: 64px 0 96px; }
+  h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.5rem); }
+  p { margin: 20px 0 30px; color: var(--on-ink-muted); font-size: 1.1875rem; }
+</style>

@@ -1,0 +1,40 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  /** On the home page the name is the headline, so the header shows nav and resume only. */
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+const root = home ? '' : '/';
+---
+<header class="site-header">
+  {!home && <a class="site-name" href="/">{site.name}</a>}
+  <nav aria-label="Main">
+    <a href={`${root}#projects`}>Projects</a>
+    <a href={`${root}#experience`}>Experience</a>
+    <a href={`${root}#contact`}>Contact</a>
+  </nav>
+  {home && <a class="resume" href={site.resumePath}>Resume (PDF)</a>}
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 26px 0;
+  }
+  nav { display: flex; gap: 28px; }
+  a { text-decoration: none; color: var(--on-ink-muted); }
+  a:hover { color: var(--on-ink); }
+  .site-name { color: var(--on-ink); font-weight: 650; }
+
+  @media (max-width: 800px) {
+    nav { gap: 20px; }
+    .resume { display: none; }
+  }
+</style>

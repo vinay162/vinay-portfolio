@@ -1,0 +1,30 @@
+/*
+  Every colour and the typeface are defined here and nowhere else.
+  To change the accent, edit --pop. To change the whole palette, edit this file.
+*/
+:root {
+  /* Light surfaces */
+  --paper: #EEF2F7;   /* off-white band */
+  --sheet: #FFFFFF;   /* white band and panels */
+  --rule: #D2D9E4;    /* hairlines on light surfaces */
+  --tint: #E8EDFC;    /* pale blue block behind figures */
+
+  /* Text */
+  --ink: #0E1B2E;     /* navy: main text and the dark bands */
+  --muted: #55627A;   /* secondary text on light surfaces */
+
+  /* Quiet working colour: links and diagram highlights on light bands */
+  --accent: #1B45E0;
+
+  /* The small splash. Only on navy bands: one button per page, plus the
+     email and next-project underlines. */
+  --pop: #FF6B1A;
+
+  /* On the navy bands */
+  --on-ink: #FFFFFF;
+  --on-ink-muted: #AEBBD0;
+  --ink-rule: #2B3A52;
+  --on-ink-hover: #C7D3FF;
+
+  --font: "Bricolage Grotesque Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
