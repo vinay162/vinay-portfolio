@@ -1,7 +1,7 @@
 ---
 title: Support assistant for Buddy Up Network
 order: 2
-summary: "Help assistant inside the app. The answer bot already existed. Built everything around it: a three-layer safety check, a set of test cases, monitoring and rate limiting."
+summary: "Help assistant inside the app, built solo: answer generation, a three-layer safety check, a set of test cases, monitoring and rate limiting."
 stack: TypeScript, Cloud Functions, OpenAI API, Firestore.
 facts:
   - label: Type
@@ -18,16 +18,17 @@ links:
 figures:
   - value: 93%+
     label: fewer support messages reaching the founders, over about a month
-  - value: 68 of 68
-    label: safety test cases passed in the final run
+  - value: 2.5 to 4 s
+    label: response time, down from 11 to 14 s
 flow:
-  caption: The step in blue is the safety check. It runs at the same time as the answer, so it never makes the reply slower.
+  caption: Both steps in blue run inside the app's own backend, at the same time, so the safety check never makes the reply slower.
   steps:
     - label: Question
       sub: from a member
     - pair:
-        - label: Answer bot
-          sub: already existed
+        - label: Answer
+          sub: one model call, help content in the prompt
+          mine: true
         - label: Safety check
           sub: three layers, 6 second limit
           mine: true
@@ -39,13 +40,17 @@ flow:
 
 Members ask the assistant a help question inside the app and get an answer straight away. Before this, support went through a form that the founders read by hand. The option to message the team now appears after the assistant has replied, and the number of messages reaching the founders fell by more than 93% over about a month.
 
-The bot that writes the answers was already running on the website, built by a teammate. This project brought it into the app and built the system around it: the app screens, the backend, the safety check, the tests, and the monitoring.
+The whole feature is built and run in the app's own backend: the app screens, answer generation, the safety check, the tests and the monitoring. The help content the answers are based on comes from the team's existing support material.
 
 ## How it works
 
-Every question goes to the answer bot and the safety check at the same time. The safety check has its own time limit of 6 seconds. If it runs over, the reply still goes out and the check finishes in the background, so a slow check means a late alert, never a missed one.
+Every question goes to the answer step and the safety check at the same time. The answer comes from a single model call that carries the help content and the member's question. The safety check has its own time limit of 6 seconds. If it runs over, the reply still goes out and the check finishes in the background, so a slow check means a late alert, never a missed one.
 
 ## Key decisions
+
+### No retrieval system where one was not needed
+
+The first version sent questions to a separate answer bot that was already running on the website. It added a lot of waiting time. The help content turned out to be small enough to send in full with every question, so the bot was replaced with one direct model call inside the backend, with no search or retrieval step. The simpler version was tried first, and it has answered well since. Response time went from 11 to 14 seconds down to 2.5 to 4 seconds.
 
 ### Three separate safety layers
 
@@ -72,6 +77,7 @@ Response times, failures and usage are recorded and summarised, with alerts for 
 | Measure | Result |
 | :-- | --: |
 | Support messages reaching the founders | down by more than 93% over about a month |
+| Response time | 11 to 14 s before, 2.5 to 4 s after |
 | Safety test cases, first run | 45 of 51 |
 | Safety test cases, final run | 68 of 68 |
 | Automated tests | 223 |
