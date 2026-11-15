@@ -94,22 +94,6 @@ export const site = {
   // Move an entry out of here once its file exists in src/content/projects/.
   upcoming: [
     {
-      order: 1,
-      title: 'Buddy Up Network',
-      summary:
-        'Social app for people with disabilities and their caregivers, on iOS and Android. Built, launched and maintained solo. Works with screen readers and includes chat, voice calls and video calls.',
-      stack: 'Flutter, Firebase, Cloud Functions (Google Cloud).',
-      note: 'Built at Spoton Fintech for a client.',
-      links: [
-        { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.network.buddyup' },
-        { label: 'App Store', url: 'https://apps.apple.com/in/app/buddy-up-network/id6569240717' },
-      ],
-      figures: [
-        { value: '10,000+', label: 'users' },
-        { value: '1 to 2.5 s', label: 'search time, down from 8 to 15 s' },
-      ],
-    },
-    {
       order: 2,
       title: 'Support assistant for Buddy Up Network',
       summary:
