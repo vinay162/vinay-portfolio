@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, next } = Astro.props;
-const { title, summary, facts, links, screenshot, flow } = entry.data;
+const { title, summary, facts, links, screenshot, flow, ongoing } = entry.data;
 const sections = splitSections(entry.rendered?.html ?? '', entry.id);
 if (flow && !sections.some((section) => section.title === 'How it works')) {
   throw new Error(entry.id + ': a flow diagram needs a section titled "## How it works" to sit under');
@@ -41,6 +41,7 @@ const primary = links.find((link) => link.primary) ?? links[0];
     <div class="wrap">
       <div class:list={['title-block', { 'has-shot': screenshot }]}>
         <a class="back" href="/#projects">All projects</a>
+        {ongoing && <span class="pill">Ongoing</span>}
         <h1 class="display">{title}</h1>
         <p class="lede">{summary}</p>
         {primary && (
@@ -112,6 +113,7 @@ const primary = links.find((link) => link.primary) ?? links[0];
   .title-block.has-shot { padding-bottom: 150px; } /* room for the screenshot to overlap */
   .back { color: var(--on-ink-muted); font-size: 0.9375rem; }
   .back:hover { color: var(--on-ink); }
+  .pill { margin-left: 14px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--on-ink-muted); color: var(--on-ink); font-size: 0.8125rem; font-weight: 600; }
   h1 { margin: 18px 0 0; font-size: clamp(3rem, 9vw, 6rem); }
   .lede { max-width: 54ch; margin: 22px 0 0; font-size: 1.25rem; line-height: 1.5; color: var(--on-ink-muted); }
   .actions { margin-top: 30px; }

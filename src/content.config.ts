@@ -44,6 +44,8 @@ const projects = defineCollection({
         steps: z.array(z.union([step, z.object({ pair: z.array(step).length(2) })])),
       })
       .optional(),
+    // Still being worked on: shows an "Ongoing" pill and an accent border.
+    ongoing: z.boolean().optional(),
     draft: z.boolean().optional(),
   }),
 });

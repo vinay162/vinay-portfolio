@@ -155,9 +155,11 @@ for (const f of files.filter((f) => extname(f) === '.html')) {
 }
 
 // The site address must be written in astro.config.mjs only.
-if (existsSync('src')) {
+const siteHost = (readFileSync('astro.config.mjs', 'utf8').match(/site:\s*'https?:\/\/([^/']+)/) || [])[1];
+if (!siteHost) fail('astro.config.mjs: could not read the site address');
+if (siteHost && existsSync('src')) {
   for (const f of walk('src')) {
-    if (/vercel\.app/.test(readFileSync(f, 'utf8'))) fail(`${f.replaceAll('\\', '/')}: hard-codes the site address (use Astro.site)`);
+    if (readFileSync(f, 'utf8').includes(siteHost)) fail(`${f.replaceAll('\\', '/')}: hard-codes the site address (use Astro.site)`);
   }
 }
 

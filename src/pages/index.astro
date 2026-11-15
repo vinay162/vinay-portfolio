@@ -18,6 +18,7 @@ const cards = [
     summary: entry.data.summary,
     stack: entry.data.stack,
     note: entry.data.note,
+    ongoing: entry.data.ongoing,
     href: `/projects/${entry.id}/`,
     links: entry.data.links.map(({ label, url }) => ({ label, url })),
     figures: entry.data.figures,

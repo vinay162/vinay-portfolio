@@ -1,14 +1,15 @@
 ---
 title: Buddy Up Network
 order: 1
-summary: Social app for people with disabilities and their caregivers, on iOS and Android. Built, launched and maintained solo. Works with screen readers and includes chat, voice calls and video calls.
+summary: Social app for people with disabilities and their caregivers, on iOS and Android. Sole developer since launch, with releases ongoing. Works with screen readers and includes chat, voice calls and video calls.
 stack: Flutter, Firebase, Cloud Functions (Google Cloud).
-note: Built at Spoton Fintech for a client.
+note: Developed at Spoton Fintech for a client.
+ongoing: true
 facts:
   - label: Type
     value: Client product, built at Spoton Fintech
   - label: Role
-    value: Built, launched and maintained solo
+    value: Sole developer since launch
   - label: Built with
     value: Flutter, Firebase, Cloud Functions (Google Cloud), Agora, OpenAI API
 links:

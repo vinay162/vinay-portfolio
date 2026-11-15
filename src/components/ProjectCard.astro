@@ -6,18 +6,20 @@ interface Props {
   summary: string;
   stack: string;
   note?: string;
+  /** Still being worked on. */
+  ongoing?: boolean;
   /** Link to the project's own page, when it has one. */
   href?: string;
   links: CardLink[];
   figures: Figure[];
 }
 
-const { title, summary, stack, note, href, links, figures } = Astro.props;
+const { title, summary, stack, note, ongoing, href, links, figures } = Astro.props;
 const hasLinks = Boolean(href) || links.length > 0;
 ---
-<article class="project">
+<article class:list={["project", { ongoing }]}>
   <div>
-    <h3>{title}</h3>
+    <h3>{title}{ongoing && <span class="pill">Ongoing</span>}</h3>
     <p>{summary}</p>
     <p class="stack">{stack}{note && ` ${note}`}</p>
     {hasLinks && (
@@ -47,6 +49,19 @@ const hasLinks = Boolean(href) || links.length > 0;
     background: var(--sheet);
     border: 1px solid var(--rule);
     border-radius: 10px;
+  }
+  .project.ongoing { border: 1.5px solid var(--accent); }
+  .pill {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--tint);
+    color: var(--accent);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    vertical-align: 0.3em;
   }
   h3 { margin: 0 0 10px; font-size: 1.625rem; font-weight: 650; line-height: 1.2; letter-spacing: -0.015em; }
   p { margin: 0; max-width: 54ch; }
