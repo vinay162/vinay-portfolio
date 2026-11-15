@@ -13,6 +13,10 @@ const BANNED = [
   { test: (t) => /open to work/i.test(t), name: '"open to work"' },
   { test: (t) => /\bseeking\b/i.test(t), name: '"seeking"' },
   { test: (t) => t.includes('—'), name: 'an em dash' },
+  // A shell can swallow "$0" in text and print its own path instead.
+  { test: (t) => /\/usr\/bin\/|\/bin\/(?:ba)?sh\b/.test(t), name: 'a stray shell path (a broken $ figure?)' },
+  // Money figures stay off the public site: costs and spend belong to the client.
+  { test: (t) => /\$\d/.test(t), name: 'a money figure' },
 ];
 // Optional extra words, kept out of this public repo: a local, git-ignored
 // file .private-checks.json shaped like { "banned": ["word", "another"] }.

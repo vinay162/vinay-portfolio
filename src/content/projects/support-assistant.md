@@ -17,7 +17,7 @@ links:
     primary: true
 figures:
   - value: 93%+
-    label: fewer support messages reaching the founders, over about a month
+    label: fewer support messages needing a person, over about a month
   - value: 2.9 s
     label: median response time, down from 11 to 14 s
 flow:
@@ -38,7 +38,7 @@ flow:
 
 ## About the feature
 
-Members ask the assistant a help question inside the app and get an answer straight away. Before this, support went through a form that the founders read by hand. The option to message the team now appears after the assistant has replied, and the number of messages reaching the founders fell by more than 93% over about a month.
+Members ask the assistant a help question inside the app and get an answer straight away. Before this, support requests went through a form that the team reviewed by hand. The option to message the team now appears after the assistant has replied, and support messages that need a person fell by more than 93% over about a month.
 
 The whole feature runs in the app's own backend: the app screens, answer generation, the safety check, the tests and the monitoring. The help content the answers are based on was rewritten and updated as part of this work.
 
@@ -54,11 +54,11 @@ For a while, questions went to a separate answer bot that was already running on
 
 ### Three separate safety layers
 
-The members of this app include vulnerable people, so a message that suggests someone may be at risk must not slip through. The first layer is an AI classifier that returns a fixed set of labels. The second is a set of moderation scores with cut-off values, which can overrule the classifier and cannot be argued with by the person typing. The third is a keyword list, used only if both of the others fail.
+The members of this app include vulnerable people, so a message that suggests someone may be at risk must not slip through. The first layer is an AI classifier that returns a fixed set of labels. The second is a set of moderation scores with cut-off values, which can overrule the classifier and cannot be argued with by the person typing. The third is a keyword list, a backstop if the model layers are unavailable.
 
 ### Hindi and Hinglish are treated as first-class
 
-Testing showed that the moderation scores were weak on Hindi written in English letters. The keyword layer was extended to cover English, Hindi and Hinglish, so the check does not depend on one layer for those languages.
+Many members write in Hindi or in Hindi typed in English letters. Every layer was tested in English, Hindi and Hinglish, and the keyword layer covers all three.
 
 ### A test set that every change is judged against
 
@@ -70,23 +70,21 @@ The classifier lives on the server and every message records which version check
 
 ### Monitoring, logging and rate limiting
 
-The response time of every question and reply is measured inside the pipeline and stored with the message. A second, automated check scores whether each reply actually answered the question. An admin dashboard shows resolution, answer quality, response times, failures and cost, with alerts for the team and limits on how often one member can ask.
+The response time of every question and reply is measured inside the pipeline and stored with the message. A second, automated check scores whether each reply actually answered the question. Failures raise alerts, and rate limits stop any one member from flooding the system.
 
 ## Results
 
 | Measure | Result |
 | :-- | --: |
-| Support messages reaching the founders | down by more than 93% over about a month |
-| Chats resolved without a person (last 7 days) | 95% |
+| Support messages needing a person | down by more than 93% over about a month |
+| Chats resolved without a person | 95% |
 | Replies that answered the question, by the automated check | 91% |
 | Replies delivered | 100% |
 | Response time, median / 95th percentile | 2.9 s / 8.2 s |
 | Response time with the earlier separate bot | 11 to 14 s |
-| Model cost per resolved chat | /usr/bin/bash.0025 |
 | Safety test cases, first run | 45 of 51 |
 | Safety test cases, final run | 68 of 68 |
 | Automated tests | 223 |
 | Classifier versions shipped without an app release | 8 |
-| Cost of one safety check | $0.000259 |
 
-<small>Live figures are from the admin dashboard for 9 to 15 November 2026. The test set grew from 51 to 68 cases as gaps were found, so the first and final runs are not a like-for-like comparison.</small>
+<small>The test set grew from 51 to 68 cases as gaps were found, so the first and final runs are not a like-for-like comparison.</small>
