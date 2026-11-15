@@ -31,7 +31,7 @@ export const site = {
   description:
     'Vinay Purohit is a software engineer in Mumbai working across full-stack, backend and AI. Built a social app with 10,000+ users and a booking app with online payments, live on Google Play.',
   // <b> marks the two facts that should stand out in the opening paragraph.
-  lede: 'Nearly 3 years of experience across mobile, web and AI. Built and launched <b>a social app with 10,000+ users</b> and <b>a booking app with online payments</b>, live on Google Play. Based in Mumbai.',
+  lede: '<b>Nearly 3 years of experience</b> across mobile, web and AI. Built and launched <b>a social app with 10,000+ users</b> and <b>a booking app with online payments</b>, live on Google Play. Based in Mumbai.',
   email: 'vinaypurohit270@gmail.com',
   links: {
     linkedin: 'https://linkedin.com/in/vinay-purohit-58b3922b8',
