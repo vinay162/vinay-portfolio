@@ -27,9 +27,10 @@ export const site = {
   role: 'Software Engineer | Full-Stack, Backend & AI/GenAI',
   jobTitle: 'Software Engineer',
   location: 'Mumbai, India',
-  title: 'Vinay Purohit, Software Engineer',
+  title: 'Vinay Purohit, Software Engineer | Full-Stack, Backend & AI/GenAI',
+  // Shown under the title in link previews and search results: key facts first.
   description:
-    'Vinay Purohit is a software engineer in Mumbai working across full-stack, backend and AI. Built a social app with 10,000+ users and a booking app with online payments, live on Google Play.',
+    'Nearly 3 years of experience. Built a social app with 10,000+ users and a booking app with online payments, live on Google Play. Based in Mumbai.',
   // <b> marks the two facts that should stand out in the opening paragraph.
   lede: '<b>Nearly 3 years of experience</b> across mobile, web and AI. Built and launched <b>a social app with 10,000+ users</b> and <b>a booking app with online payments</b>, live on Google Play. Based in Mumbai.',
   email: 'vinaypurohit270@gmail.com',

@@ -15,7 +15,8 @@ interface Props {
 const { title, description, ogType = 'website' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 // The image shown when a link to the site is shared.
-const previewImage = new URL('/og.png', Astro.site).href;
+// Renamed on every change (og-2, og-3...) so apps don't reuse a cached copy.
+const previewImage = new URL('/og-2.png', Astro.site).href;
 ---
 <!doctype html>
 <html lang="en">

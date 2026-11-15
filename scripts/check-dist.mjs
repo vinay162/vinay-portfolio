@@ -119,7 +119,7 @@ if (lore) {
 }
 
 // Files for search engines, link previews and AI readers
-for (const name of ['llms.txt', 'llms-full.txt', 'robots.txt', 'sitemap-index.xml', '404.html', 'og.png', 'favicon.svg']) {
+for (const name of ['llms.txt', 'llms-full.txt', 'robots.txt', 'sitemap-index.xml', '404.html', 'og-2.png', 'favicon.svg']) {
   if (!existsSync(join(DIST, name))) fail(`${name} missing`);
 }
 const llms = read('llms.txt');
@@ -150,7 +150,7 @@ if (ld.length !== 1) {
 }
 for (const f of files.filter((f) => extname(f) === '.html')) {
   const text = readFileSync(f, 'utf8');
-  if (!/<meta property="og:image" content="https?:\/\/[^"]+\/og\.png"/.test(text)) fail(`${rel(f)}: missing link-preview image tag`);
+  if (!/<meta property="og:image" content="https?:\/\/[^"]+\/og-\d+\.png"/.test(text)) fail(`${rel(f)}: missing link-preview image tag`);
   if (!/<link rel="icon"/.test(text)) fail(`${rel(f)}: missing favicon link`);
 }
 

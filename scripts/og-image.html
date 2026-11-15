@@ -1,11 +1,15 @@
 <!doctype html>
 <!--
-  Source for public/og.png, the image shown when the site is shared on
-  LinkedIn, WhatsApp and similar. To regenerate after a change, screenshot
-  this page at exactly 1200 x 630 with a headless browser, for example:
+  Source for public/og-2.png, the image shown when the site is shared on
+  LinkedIn, WhatsApp and similar. Everything sits in the centre square,
+  because WhatsApp crops the image towards a square from the centre.
 
+  To regenerate after a change, screenshot this page at exactly 1200 x 630:
     chrome --headless=new --hide-scrollbars --window-size=1200,630 \
-      --screenshot=public/og.png scripts/og-image.html
+      --screenshot=public/og-2.png scripts/og-image.html
+  When the image changes, also change its file name (og-3.png, ...) and the
+  path in src/layouts/Base.astro, so apps fetch the new one instead of a
+  cached copy.
 -->
 <html lang="en">
 <head>
@@ -19,23 +23,26 @@
   }
   html, body { margin: 0; width: 1200px; height: 630px; }
   body {
-    box-sizing: border-box;
-    padding: 84px 88px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: #0E1B2E;
     color: #FFFFFF;
     font-family: "Bricolage Grotesque Variable", "Segoe UI", sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    text-align: center;
   }
-  .name { font-size: 132px; font-weight: 650; font-stretch: 87%; letter-spacing: -0.035em; line-height: 0.98; }
-  .role { margin-top: 30px; max-width: 1040px; font-size: 50px; font-weight: 500; font-stretch: 92%; letter-spacing: -0.015em; line-height: 1.15; }
-  .bar { width: 120px; height: 10px; margin-top: 52px; background: #FF6B1A; border-radius: 5px; }
+  .name { font-size: 104px; font-weight: 650; font-stretch: 87%; letter-spacing: -0.035em; line-height: 0.95; }
+  .role { margin-top: 26px; font-size: 34px; font-weight: 550; font-stretch: 92%; line-height: 1.25; }
+  .role span { display: block; }
+  .bar { width: 72px; height: 7px; margin: 26px 0 22px; background: #FF6B1A; border-radius: 4px; }
+  .years { font-size: 26px; font-weight: 500; color: #AEBBD0; }
 </style>
 </head>
 <body>
-  <div class="name">Vinay Purohit</div>
-  <div class="role">Software Engineer | Full-Stack, Backend &amp; AI/GenAI</div>
+  <div class="name">Vinay<br>Purohit</div>
+  <div class="role"><span>Software Engineer</span><span>Full-Stack, Backend &amp; AI/GenAI</span></div>
   <div class="bar"></div>
+  <div class="years">Nearly 3 years of experience</div>
 </body>
 </html>
