@@ -31,9 +31,9 @@ export const site = {
   title: 'Vinay Purohit, Software Engineer | Full-Stack, Backend & AI/GenAI',
   // Shown under the title in link previews and search results: key facts first.
   description:
-    'Nearly 3 years of experience. Sole developer of a social app with 10,000+ users, and built a booking app with online payments, live on Google Play. Based in Mumbai.',
+    'Nearly 3 years of experience. Sole developer of a social app with 10,000+ users, and built a booking app with Razorpay payments, live on Google Play. Based in Mumbai.',
   // <b> marks the two facts that should stand out in the opening paragraph.
-  lede: '<b>Nearly 3 years of experience</b> across mobile, web and AI. Sole developer of <b>a social app with 10,000+ users</b>, and built <b>a booking app with online payments</b>, live on Google Play. Based in Mumbai.',
+  lede: '<b>Nearly 3 years of experience</b> across mobile, web and AI. Sole developer of <b>a social app with 10,000+ users</b>, and built <b>a booking app with Razorpay payments</b>, live on Google Play. Based in Mumbai.',
   email: 'vinaypurohit270@gmail.com',
   links: {
     linkedin: 'https://linkedin.com/in/vinay-purohit-58b3922b8',
@@ -45,7 +45,7 @@ export const site = {
   // (or an AI tool) meets the site without the page around it.
   about: {
     summary:
-      'Vinay Purohit is a software engineer in Mumbai, India, with nearly 3 years of experience building mobile and web apps, covering frontend, backend and AI features. He has been the sole developer of Buddy Up Network, a social app for people with disabilities and their caregivers with more than 10,000 users, since its launch, and built rentmyclass, a classroom booking app with online payments that is live on Google Play.',
+      'Vinay Purohit is a software engineer in Mumbai, India, with nearly 3 years of experience building mobile and web apps, covering frontend, backend and AI features. He has been the sole developer of Buddy Up Network, a social app for people with disabilities and their caregivers with more than 10,000 users, since its launch, and built rentmyclass, a classroom booking app with Razorpay payments that is live on Google Play.',
     facts: [
       "Current role: Software Developer (Founders' Office) at Spoton Fintech, Mumbai, since May 2024.",
       'Earlier: Applied AI Intern at Kluster, Bangalore, January to April 2024.',
