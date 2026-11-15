@@ -16,7 +16,7 @@ const root = home ? '' : '/';
     <a href={`${root}#experience`}>Experience</a>
     <a href={`${root}#contact`}>Contact</a>
   </nav>
-  {home && <a class="resume" href={site.resumePath}>Resume (PDF)</a>}
+  {home && <a class="resume" href={site.resumePath} target="_blank" rel="noopener">Resume (PDF)</a>}
 </header>
 
 <style>

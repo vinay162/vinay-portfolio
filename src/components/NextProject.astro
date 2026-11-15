@@ -19,7 +19,7 @@ const { next, outside } = Astro.props;
     {outside && (
       <div>
         <span>Elsewhere</span>
-        <a class="heading" href={outside.url}>{outside.label}</a>
+        <a class="heading" href={outside.url} target="_blank" rel="noopener">{outside.label}</a>
       </div>
     )}
   </div>

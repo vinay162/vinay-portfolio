@@ -8,7 +8,7 @@ import { site } from '../data/site';
   </h1>
   <p class="lede" set:html={site.lede} />
   <div class="actions">
-    <a class="btn btn-pop" href={site.resumePath}>Download resume (PDF)</a>
+    <a class="btn btn-pop" href={site.resumePath} target="_blank" rel="noopener">Download resume (PDF)</a>
     <a class="btn btn-quiet" href={`mailto:${site.email}`}>Email</a>
   </div>
 </div>

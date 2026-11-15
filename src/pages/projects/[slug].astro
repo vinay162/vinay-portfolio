@@ -36,7 +36,7 @@ const primary = links.find((link) => link.primary) ?? links[0];
         <p class="lede">{summary}</p>
         {primary && (
           <div class="actions">
-            <a class="btn btn-pop" href={primary.url}>{primary.cta ?? primary.label}</a>
+            <a class="btn btn-pop" href={primary.url} target="_blank" rel="noopener">{primary.cta ?? primary.label}</a>
           </div>
         )}
         {facts.length > 0 && (
@@ -57,7 +57,7 @@ const primary = links.find((link) => link.primary) ?? links[0];
     {screenshot && (
       <div class="wrap">
         <figure class="shot">
-          <a href={screenshot.src} aria-label="Open the screenshot at full size">
+          <a href={screenshot.src} target="_blank" rel="noopener" aria-label="Open the screenshot at full size in a new tab">
             <img src={screenshot.src} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} />
           </a>
           <figcaption>{screenshot.caption}</figcaption>

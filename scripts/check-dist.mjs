@@ -64,6 +64,10 @@ for (const f of files) {
   for (const m of text.matchAll(/\s(?:href|src)="(\/[^"]*)"/g)) {
     if (!resolves(m[1])) fail(`${rel(f)}: broken internal link ${m[1]}`);
   }
+  // Outside links, the resume and full-size images open in a new tab; links within the site do not.
+  for (const m of text.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+|[^"]+\.(?:pdf|jpg|png))"[^>]*>/g)) {
+    if (!/target="_blank"/.test(m[0]) || !/rel="noopener"/.test(m[0])) fail(`${rel(f)}: link to ${m[1]} should open in a new tab`);
+  }
 }
 
 // ---- Page-specific checks ----

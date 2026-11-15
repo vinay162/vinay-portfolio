@@ -23,7 +23,7 @@ const hasLinks = Boolean(href) || links.length > 0;
     {hasLinks && (
       <p class="links">
         {href && <a class="more" href={href}>View project</a>}
-        {links.map((link) => <a href={link.url}>{link.label}</a>)}
+        {links.map((link) => <a href={link.url} target="_blank" rel="noopener">{link.label}</a>)}
       </p>
     )}
   </div>
