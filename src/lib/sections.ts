@@ -14,11 +14,21 @@ export interface Section {
   panels: Panel[];
 }
 
-const plainText = (html: string) => html.replace(/<[^>]+>/g, '').trim();
+const ENTITIES: Record<string, string> = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&#x27;': "'" };
 
-/** Tables scroll inside their own box on narrow screens. */
-const wrapTables = (html: string) =>
-  html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>');
+/** Heading text without tags or HTML entities (the template escapes it again). */
+const plainText = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&(?:amp|lt|gt|quot|#39|#x27);/g, (entity) => ENTITIES[entity])
+    .trim();
+
+/** Tables scroll inside their own box; outside links open in a new tab. */
+const finish = (html: string) =>
+  html
+    .replace(/<table>/g, '<div class="table-wrap"><table>')
+    .replace(/<\/table>/g, '</table></div>')
+    .replace(/<a href="(https?:\/\/[^"]+)"/g, '<a href="$1" target="_blank" rel="noopener"');
 
 function splitAt(html: string, tag: 'h2' | 'h3') {
   const open = new RegExp(`<${tag}[^>]*>`);
@@ -31,13 +41,18 @@ function splitAt(html: string, tag: 'h2' | 'h3') {
   return { before: before.trim(), parts };
 }
 
-export function splitSections(html: string): Section[] {
-  return splitAt(html, 'h2').parts.map((section) => {
-    const { before, parts } = splitAt(section.html, 'h3');
+export function splitSections(html: string, source = 'project'): Section[] {
+  const { before, parts } = splitAt(html, 'h2');
+  if (before) {
+    // Text above the first "## Heading" has no band to live in and would vanish.
+    throw new Error(`${source}: move the text above the first "## Heading" into a section`);
+  }
+  return parts.map((section) => {
+    const inner = splitAt(section.html, 'h3');
     return {
       title: section.title,
-      html: wrapTables(before),
-      panels: parts.map((panel) => ({ title: panel.title, html: wrapTables(panel.html) })),
+      html: finish(inner.before),
+      panels: inner.parts.map((panel) => ({ title: panel.title, html: finish(panel.html) })),
     };
   });
 }

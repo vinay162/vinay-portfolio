@@ -9,7 +9,7 @@ const fail = (msg) => problems.push(msg);
 
 // Text that must never appear in any published file.
 const BANNED = [
-  { test: (t) => /(?:\+91[\s-]?)?\b[6-9]\d{9}\b/.test(t), name: 'a phone number' },
+  { test: (t) => /(?:\+91[\s-]?)?\b[6-9]\d{4}[\s-]?\d{5}\b/.test(t), name: 'a phone number' },
   { test: (t) => /open to work/i.test(t), name: '"open to work"' },
   { test: (t) => /\bseeking\b/i.test(t), name: '"seeking"' },
   { test: (t) => t.includes('—'), name: 'an em dash' },
@@ -66,7 +66,7 @@ for (const f of files) {
   }
   // Outside links, the resume and full-size images open in a new tab; links within the site do not.
   for (const m of text.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+|[^"]+\.(?:pdf|jpg|png))"[^>]*>/g)) {
-    if (!/target="_blank"/.test(m[0]) || !/rel="noopener"/.test(m[0])) fail(`${rel(f)}: link to ${m[1]} should open in a new tab`);
+    if (!/target="_blank"/.test(m[0]) || !/rel="[^"]*noopener/.test(m[0])) fail(`${rel(f)}: link to ${m[1]} should open in a new tab`);
   }
 }
 

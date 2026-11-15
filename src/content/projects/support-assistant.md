@@ -17,7 +17,7 @@ links:
     primary: true
 figures:
   - value: 93%+
-    label: fewer support messages reaching the founders
+    label: fewer support messages reaching the founders, over about a month
   - value: 68 of 68
     label: safety test cases passed in the final run
 flow:
@@ -37,7 +37,7 @@ flow:
 
 ## About the feature
 
-Members ask the assistant a help question inside the app and get an answer straight away. Before this, support went through a form that the founders read by hand. The option to message the team now appears after the assistant has replied, and the number of messages reaching the founders has fallen by more than 93%.
+Members ask the assistant a help question inside the app and get an answer straight away. Before this, support went through a form that the founders read by hand. The option to message the team now appears after the assistant has replied, and the number of messages reaching the founders fell by more than 93% over about a month.
 
 The bot that writes the answers was already running on the website, built by a teammate. This project brought it into the app and built the system around it: the app screens, the backend, the safety check, the tests, and the monitoring.
 
@@ -71,7 +71,7 @@ Response times, failures and usage are recorded and summarised, with alerts for 
 
 | Measure | Result |
 | :-- | --: |
-| Support messages reaching the founders | down by more than 93% |
+| Support messages reaching the founders | down by more than 93% over about a month |
 | Safety test cases, first run | 45 of 51 |
 | Safety test cases, final run | 68 of 68 |
 | Automated tests | 223 |
