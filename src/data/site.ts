@@ -31,7 +31,7 @@ export const site = {
   description:
     'Vinay Purohit is a software engineer in Mumbai working across full-stack, backend and AI. Built a social app with 10,000+ users and a booking app with online payments, live on Google Play.',
   // <b> marks the two facts that should stand out in the opening paragraph.
-  lede: '2+ years building mobile and web apps. Built and launched <b>a social app with 10,000+ users</b> and <b>a booking app with online payments</b>, live on Google Play. Based in Mumbai.',
+  lede: 'Nearly 3 years of experience across mobile, web and AI. Built and launched <b>a social app with 10,000+ users</b> and <b>a booking app with online payments</b>, live on Google Play. Based in Mumbai.',
   email: 'vinaypurohit270@gmail.com',
   links: {
     linkedin: 'https://linkedin.com/in/vinay-purohit-58b3922b8',
@@ -43,7 +43,7 @@ export const site = {
   // (or an AI tool) meets the site without the page around it.
   about: {
     summary:
-      'Vinay Purohit is a software engineer in Mumbai, India, with more than two years of experience building mobile and web apps, covering frontend, backend and AI features. He built and launched Buddy Up Network, a social app for people with disabilities and their caregivers that has more than 10,000 users, and rentmyclass, a classroom booking app with online payments that is live on Google Play.',
+      'Vinay Purohit is a software engineer in Mumbai, India, with nearly 3 years of experience building mobile and web apps, covering frontend, backend and AI features. He built and launched Buddy Up Network, a social app for people with disabilities and their caregivers that has more than 10,000 users, and rentmyclass, a classroom booking app with online payments that is live on Google Play.',
     facts: [
       "Current role: Software Developer (Founders' Office) at Spoton Fintech, Mumbai, since May 2024.",
       'Earlier: Applied AI Intern at Kluster, Bangalore, January to April 2024.',
