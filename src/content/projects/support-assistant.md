@@ -18,8 +18,8 @@ links:
 figures:
   - value: 93%+
     label: fewer support messages reaching the founders, over about a month
-  - value: 2.5 to 4 s
-    label: response time, down from 11 to 14 s
+  - value: 2.9 s
+    label: median response time, down from 11 to 14 s
 flow:
   caption: Both steps in blue run inside the app's own backend, at the same time, so the safety check never makes the reply slower.
   steps:
@@ -50,7 +50,7 @@ Every question goes to the answer step and the safety check at the same time. Th
 
 ### No retrieval system where one was not needed
 
-For a while, questions went to a separate answer bot that was already running on the website. It added a lot of waiting time and gave little control over the answers. The help content turned out to be small enough to send in full with every question, so the bot was replaced with one direct model call inside the backend, with no search or retrieval step. The simpler version was tried first, and it has answered well since. Response time went from 11 to 14 seconds down to 2.5 to 4 seconds.
+For a while, questions went to a separate answer bot that was already running on the website. It added a lot of waiting time and gave little control over the answers. The help content turned out to be small enough to send in full with every question, so the bot was replaced with one direct model call inside the backend, with no search or retrieval step. The simpler version was tried first, and it has answered well since. Response time went from 11 to 14 seconds to a median of 2.9 seconds.
 
 ### Three separate safety layers
 
@@ -70,18 +70,23 @@ The classifier lives on the server and every message records which version check
 
 ### Monitoring, logging and rate limiting
 
-The response time of every question and reply is measured inside the pipeline and stored with the message, and the admin dashboard shows the average and the time for each message. Failures and usage are recorded too, with alerts for the team and limits on how often one member can ask.
+The response time of every question and reply is measured inside the pipeline and stored with the message. A second, automated check scores whether each reply actually answered the question. An admin dashboard shows resolution, answer quality, response times, failures and cost, with alerts for the team and limits on how often one member can ask.
 
 ## Results
 
 | Measure | Result |
 | :-- | --: |
 | Support messages reaching the founders | down by more than 93% over about a month |
-| Response time | 11 to 14 s before, 2.5 to 4 s after |
+| Chats resolved without a person (last 7 days) | 95% |
+| Replies that answered the question, by the automated check | 91% |
+| Replies delivered | 100% |
+| Response time, median / 95th percentile | 2.9 s / 8.2 s |
+| Response time with the earlier separate bot | 11 to 14 s |
+| Model cost per resolved chat | /usr/bin/bash.0025 |
 | Safety test cases, first run | 45 of 51 |
 | Safety test cases, final run | 68 of 68 |
 | Automated tests | 223 |
 | Classifier versions shipped without an app release | 8 |
 | Cost of one safety check | $0.000259 |
 
-<small>The test set grew from 51 to 68 cases as gaps were found, so the first and final runs are not a like-for-like comparison.</small>
+<small>Live figures are from the admin dashboard for 9 to 15 November 2026. The test set grew from 51 to 68 cases as gaps were found, so the first and final runs are not a like-for-like comparison.</small>
