@@ -92,32 +92,5 @@ export const site = {
   ],
 
   // Move an entry out of here once its file exists in src/content/projects/.
-  upcoming: [
-    {
-      order: 2,
-      title: 'Support assistant for Buddy Up Network',
-      summary:
-        'Help assistant inside the app. The answer bot already existed. Built everything around it: a three-layer safety check, a set of test cases, monitoring and rate limiting.',
-      stack: 'TypeScript, Cloud Functions, OpenAI API, Firestore.',
-      links: [],
-      figures: [
-        { value: '68 of 68', label: 'safety test cases passed in the final run' },
-        { value: '223', label: 'automated tests' },
-      ],
-    },
-    {
-      order: 3,
-      title: 'rentmyclass',
-      summary:
-        'Classroom booking app with online payments. Built solo for a freelance client: Android app, backend and admin dashboard. Two people cannot book the same slot, and unpaid bookings are cancelled automatically.',
-      stack: 'Flutter, Supabase (PostgreSQL), Razorpay, React.',
-      links: [
-        { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.rentmyclass.rent_my_class' },
-      ],
-      figures: [
-        { value: 'Live', label: 'on Google Play' },
-        { value: '10 min', label: 'before an unpaid booking is cancelled' },
-      ],
-    },
-  ] as UpcomingProject[],
+  upcoming: [] as UpcomingProject[],
 };
