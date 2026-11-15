@@ -7,7 +7,7 @@ facts:
   - label: Type
     value: Freelance project, live on Google Play
   - label: Role
-    value: Built solo, from design to store release
+    value: Built solo in about a month, from first design to store release
   - label: Built with
     value: Flutter, Supabase (PostgreSQL), Razorpay, Firebase, React
 links:
@@ -29,7 +29,7 @@ flow:
       sub: one booking at a time
       mine: true
     - label: Held for 10 minutes
-      sub: released if unpaid
+      sub: released by the server if unpaid
       mine: true
     - label: Payment
       sub: Razorpay
@@ -43,7 +43,7 @@ flow:
 
 rentmyclass lets people find a classroom, pick a time slot and pay for it from their phone. The owner manages everything from a web dashboard.
 
-It was built end to end by one person for a freelance client: the Android app, the backend, the payment flow, the admin dashboard and the Google Play release.
+It was built end to end by one person for a freelance client: the Android app, the backend, the payment flow, the admin dashboard and the Google Play release. From the first line of code to live on Google Play took about one month, including the 14-day test with 12 testers that Google Play requires before a new app can go public.
 
 ## How it works
 
@@ -57,7 +57,7 @@ When two people try to book the same slot at the same moment, the database locks
 
 ### Unpaid bookings are released automatically
 
-A slot that is picked but not paid for within 10 minutes goes back on sale. A scheduled job inside the database does this (pg_cron), so no separate server is needed to keep availability correct.
+A slot that is picked but not paid for within 10 minutes goes back on sale. The release is done by a scheduled job inside the database (pg_cron), not by the app. It still happens if the user closes the app, loses connection or the phone switches off, so a slot can never stay blocked because of something on the user's side.
 
 ### Prices and payments are decided on the server
 
@@ -75,6 +75,7 @@ A React web dashboard lets the owner manage bookings and see how the classrooms 
 
 | Part | What was delivered |
 | :-- | :-- |
+| Timeline | About one month from start to live, including Google Play's 14-day, 12-tester test |
 | Android app | Live on Google Play |
 | Payments | Razorpay, with server-side verification |
 | Backend | Supabase: PostgreSQL, security rules, server functions in TypeScript |

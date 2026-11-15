@@ -16,10 +16,10 @@ links:
     url: https://play.google.com/store/apps/details?id=com.network.buddyup
     primary: true
 figures:
+  - value: 93%+
+    label: fewer support messages reaching the founders
   - value: 68 of 68
     label: safety test cases passed in the final run
-  - value: "223"
-    label: automated tests
 flow:
   caption: The step in blue is the safety check. It runs at the same time as the answer, so it never makes the reply slower.
   steps:
@@ -37,7 +37,7 @@ flow:
 
 ## About the feature
 
-Members ask the assistant a help question inside the app and get an answer straight away. Before this, support went through a form that the founders read by hand. The option to message the team now appears after the assistant has replied.
+Members ask the assistant a help question inside the app and get an answer straight away. Before this, support went through a form that the founders read by hand. The option to message the team now appears after the assistant has replied, and the number of messages reaching the founders has fallen by more than 93%.
 
 The bot that writes the answers was already running on the website, built by a teammate. This project brought it into the app and built the system around it: the app screens, the backend, the safety check, the tests, and the monitoring.
 
@@ -71,6 +71,7 @@ Response times, failures and usage are recorded and summarised, with alerts for 
 
 | Measure | Result |
 | :-- | --: |
+| Support messages reaching the founders | down by more than 93% |
 | Safety test cases, first run | 45 of 51 |
 | Safety test cases, final run | 68 of 68 |
 | Automated tests | 223 |
@@ -78,5 +79,3 @@ Response times, failures and usage are recorded and summarised, with alerts for 
 | Cost of one safety check | $0.000259 |
 
 <small>The test set grew from 51 to 68 cases as gaps were found, so the first and final runs are not a like-for-like comparison.</small>
-
-The feature is live. Usage figures are not published here because they are still being collected.
