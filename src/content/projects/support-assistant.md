@@ -1,13 +1,13 @@
 ---
 title: Support assistant for Buddy Up Network
 order: 2
-summary: "Help assistant inside the app, built solo: answer generation, a three-layer safety check, a set of test cases, monitoring and rate limiting."
+summary: "Help assistant inside the app: answer generation, a three-layer safety check, a set of test cases, monitoring and rate limiting."
 stack: TypeScript, Cloud Functions, OpenAI API, Firestore.
 facts:
   - label: Type
     value: Feature of a client product, built at Spoton Fintech
   - label: Role
-    value: Built solo, app screens and backend
+    value: Sole owner, from app screens and backend to the help content
   - label: Built with
     value: TypeScript, Cloud Functions, OpenAI API, Firestore, Flutter
 links:
@@ -40,7 +40,7 @@ flow:
 
 Members ask the assistant a help question inside the app and get an answer straight away. Before this, support went through a form that the founders read by hand. The option to message the team now appears after the assistant has replied, and the number of messages reaching the founders fell by more than 93% over about a month.
 
-The whole feature is built and run in the app's own backend: the app screens, answer generation, the safety check, the tests and the monitoring. The help content the answers are based on comes from the team's existing support material.
+The whole feature runs in the app's own backend: the app screens, answer generation, the safety check, the tests and the monitoring. The help content the answers are based on was rewritten and updated as part of this work.
 
 ## How it works
 
@@ -50,7 +50,7 @@ Every question goes to the answer step and the safety check at the same time. Th
 
 ### No retrieval system where one was not needed
 
-The first version sent questions to a separate answer bot that was already running on the website. It added a lot of waiting time. The help content turned out to be small enough to send in full with every question, so the bot was replaced with one direct model call inside the backend, with no search or retrieval step. The simpler version was tried first, and it has answered well since. Response time went from 11 to 14 seconds down to 2.5 to 4 seconds.
+For a while, questions went to a separate answer bot that was already running on the website. It added a lot of waiting time and gave little control over the answers. The help content turned out to be small enough to send in full with every question, so the bot was replaced with one direct model call inside the backend, with no search or retrieval step. The simpler version was tried first, and it has answered well since. Response time went from 11 to 14 seconds down to 2.5 to 4 seconds.
 
 ### Three separate safety layers
 
@@ -70,7 +70,7 @@ The classifier lives on the server and every message records which version check
 
 ### Monitoring, logging and rate limiting
 
-Response times, failures and usage are recorded and summarised, with alerts for the team and limits on how often one member can ask.
+The response time of every question and reply is measured inside the pipeline and stored with the message, and the admin dashboard shows the average and the time for each message. Failures and usage are recorded too, with alerts for the team and limits on how often one member can ask.
 
 ## Results
 
