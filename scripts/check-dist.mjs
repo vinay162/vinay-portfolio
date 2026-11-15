@@ -82,7 +82,7 @@ function mustContain(page, text, needles) {
 const home = read('index.html');
 mustContain('index.html', home, [
   'Vinay Purohit',
-  'Software Engineer who builds apps from start to finish',
+  'Software Engineer | Full-Stack, Backend &amp; AI/GenAI',
   'href="/projects/lore/"',
   'https://play.google.com/store/apps/details?id=com.network.buddyup',
   'https://apps.apple.com/in/app/buddy-up-network/id6569240717',
