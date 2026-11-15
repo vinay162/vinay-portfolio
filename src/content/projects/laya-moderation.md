@@ -1,6 +1,6 @@
 ---
 title: Laya moderation engine
-order: 5
+order: 4
 summary: "Open-source model that flags toxic comments, fine-tuned for free on Kaggle. Scores within 0.001 of Detoxify on the Jigsaw benchmark, and its confidence is calibrated, so about 82% of moderation decisions can be automated."
 stack: Python, Hugging Face, Kaggle GPUs, Gradio, React and TypeScript.
 facts:

@@ -1,6 +1,6 @@
 ---
 title: Lore
-order: 4
+order: 5
 summary: Desktop app that answers questions about PDF and Word documents and shows the source of each answer. Fully offline, so documents never leave the computer.
 stack: Python (FastAPI), Tauri and React, Ollama, ChromaDB.
 facts:

@@ -1,5 +1,5 @@
 ---
-title: Support assistant for Buddy Up Network
+title: AI support assistant for Buddy Up Network
 order: 2
 summary: "Help assistant inside the app: answer generation, a three-layer safety check, a set of test cases, monitoring and rate limiting."
 stack: TypeScript, Cloud Functions, OpenAI API, Firestore.
