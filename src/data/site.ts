@@ -49,7 +49,7 @@ export const site = {
     facts: [
       "Current role: Software Developer (Founders' Office) at Spoton Fintech, Mumbai, since May 2024.",
       'Earlier: Applied AI Intern at Kluster, Bangalore, January to April 2024.',
-      'Education: B.Tech in Computer Engineering, NMIMS Mumbai, 2020 to 2024.',
+      'Education: B.Tech in Computer Engineering, NMIMS Mumbai, 2020 to 2024. Schooling at The Lawrence School, Lovedale, 2011 to 2020.',
       'Strengths: building a product alone from first requirement to app-store release, making slow systems faster and measuring the result, and shipping AI features with test suites and safety checks.',
       'Tools: Python, TypeScript, JavaScript, SQL, Dart, FastAPI, PostgreSQL, Supabase, Firebase, Google Cloud Functions, React, Flutter, OpenAI API, Ollama, retrieval-augmented generation.',
       'Suited to: full-stack, backend and applied AI engineering roles.',
@@ -72,7 +72,7 @@ export const site = {
     },
     {
       title: 'Pipeline monitoring app',
-      text: 'Flutter app that connects to a Raspberry Pi Pico 2 W over Bluetooth to monitor industrial pipelines, with wireless device updates.',
+      text: 'Flutter app for Polmon Instruments that connects to a Raspberry Pi Pico 2 W over Bluetooth to monitor industrial pipelines, with wireless device updates.',
     },
   ],
 
@@ -91,6 +91,11 @@ export const site = {
       when: '2020 to 2024',
       title: 'B.Tech, Computer Engineering, NMIMS Mumbai',
       text: 'CGPA 3.57 of 4.0.',
+    },
+    {
+      when: '2011 to 2020',
+      title: 'The Lawrence School, Lovedale',
+      text: 'Schooling, Nilgiris.',
     },
   ],
 

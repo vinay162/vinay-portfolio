@@ -16,10 +16,8 @@ links:
     url: https://play.google.com/store/apps/details?id=com.rentmyclass.rent_my_class
     primary: true
 figures:
-  - value: Live
-    label: on Google Play
-  - value: 10 min
-    label: before an unpaid booking is cancelled
+  - value: About 1 month
+    label: from start to live on Google Play, including its 14-day testing period
 flow:
   caption: Steps in blue are the rules that keep bookings and payments correct.
   steps:

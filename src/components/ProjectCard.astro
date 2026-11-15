@@ -29,7 +29,7 @@ const hasLinks = Boolean(href) || links.length > 0;
       </p>
     )}
   </div>
-  <div class="figures">
+  <div class:list={["figures", { single: figures.length === 1 }]}>
     {figures.map((figure) => (
       <div>
         <span class="value">{figure.value}</span>
@@ -79,6 +79,7 @@ const hasLinks = Boolean(href) || links.length > 0;
     background: var(--tint);
     border-radius: 8px;
   }
+  .figures.single { grid-template-columns: 1fr; }
   .value {
     display: block;
     font-size: 2rem;

@@ -28,7 +28,8 @@ const projects = defineCollection({
         primary: z.boolean().optional(),
       }),
     ),
-    figures: z.array(z.object({ value: z.string(), label: z.string() })).length(2),
+    // One or two real measured figures. No figure is better than a filler one.
+    figures: z.array(z.object({ value: z.string(), label: z.string() })).min(1).max(2),
     screenshot: z
       .object({
         src: z.string(),
