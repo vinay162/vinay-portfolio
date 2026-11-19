@@ -18,6 +18,24 @@ a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 .band-ink :focus-visible { outline-color: var(--on-ink); }
 
+/* Text for screen readers only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Text links that open a new tab get a small arrow, so it is clear they
+   leave the site. Buttons and image links are left alone. The second
+   `content` line gives screen readers words instead of "north east arrow";
+   browsers that do not support it keep the first. */
+a[target="_blank"]:not(.btn):not(.no-arrow)::after {
+  content: "\2197";
+  content: "\2197" / " (opens in a new tab)";
+  display: inline-block; /* keeps the link underline off the arrow */
+  margin-left: 0.2em;
+  font-size: 0.85em;
+}
+
 .skip { position: absolute; left: -999px; top: 0; }
 .skip:focus { left: 16px; top: 16px; z-index: 10; background: var(--sheet); color: var(--ink); padding: 8px 12px; }
 

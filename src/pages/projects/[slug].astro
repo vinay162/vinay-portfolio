@@ -66,7 +66,7 @@ const primary = links.find((link) => link.primary) ?? links[0];
     {screenshot && (
       <div class="wrap">
         <figure class="shot">
-          <a href={screenshot.src} target="_blank" rel="noopener" aria-label="Open the screenshot at full size in a new tab">
+          <a class="no-arrow" href={screenshot.src} target="_blank" rel="noopener" aria-label="Open the screenshot at full size in a new tab">
             <img src={screenshot.src} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} />
           </a>
           <figcaption>{screenshot.caption}</figcaption>

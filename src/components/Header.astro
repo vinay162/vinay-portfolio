@@ -17,7 +17,9 @@ const root = home ? '' : '/';
     <a href={`${root}#skills`}>Skills</a>
     <a href={`${root}#contact`}>Contact</a>
   </nav>
-  {home && <a class="resume" href={site.resumePath} target="_blank" rel="noopener">Resume (PDF)</a>}
+  {/* On every page, so a visitor who lands on a project page can still get it.
+      Hidden on phones on the home page only, where the big button is right below. */}
+  <a class:list={['resume', { 'home-resume': home }]} href={site.resumePath} target="_blank" rel="noopener">Resume (PDF)</a>
 </header>
 
 <style>
@@ -36,6 +38,10 @@ const root = home ? '' : '/';
 
   @media (max-width: 800px) {
     nav { gap: 20px; }
-    .resume { display: none; }
+    .home-resume { display: none; }
+    /* Phones: name and Resume share the first line, the nav goes below. */
+    .site-name { order: 0; }
+    .resume { order: 1; margin-left: auto; }
+    nav { order: 2; width: 100%; }
   }
 </style>
