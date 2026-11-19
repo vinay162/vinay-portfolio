@@ -1,9 +1,14 @@
 ---
 interface Row {
   title: string;
-  text: string;
+  /** One line of detail. */
+  text?: string;
+  /** Bullet points, used instead of `text` for jobs. */
+  points?: string[];
   /** Date range. When present the row leads with it. */
   when?: string;
+  /** Location, shown under the date. */
+  where?: string;
 }
 
 interface Props {
@@ -16,17 +21,25 @@ const dated = items.some((item) => item.when);
 <ul class:list={['rows', { dated }]}>
   {items.map((item) =>
     dated ? (
-      <li>
-        <span class="when">{item.when}</span>
+      <li class="row">
+        <div class="meta">
+          <span class="when">{item.when}</span>
+          {item.where && <span class="where">{item.where}</span>}
+        </div>
         <div>
           <b>{item.title}</b>
-          <span>{item.text}</span>
+          {item.text && <span class="text">{item.text}</span>}
+          {item.points && (
+            <ul class="points">
+              {item.points.map((point) => <li>{point}</li>)}
+            </ul>
+          )}
         </div>
       </li>
     ) : (
-      <li>
+      <li class="row">
         <b>{item.title}</b>
-        <span>{item.text}</span>
+        <span class="text">{item.text}</span>
       </li>
     ),
   )}
@@ -34,19 +47,27 @@ const dated = items.some((item) => item.when);
 
 <style>
   .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
-  li {
+  .row {
     display: grid;
-    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    /* Same first column in every list, so all sections share one left edge. */
+    grid-template-columns: 13rem minmax(0, 1fr);
     gap: 4px 40px;
     padding: 20px 0;
     border-bottom: 1px solid var(--rule);
   }
-  .dated li { grid-template-columns: 13rem minmax(0, 1fr); }
   b { display: block; font-weight: 600; }
-  span { color: var(--muted); }
+  .text { display: block; color: var(--muted); }
+  .meta { display: flex; flex-direction: column; gap: 2px; }
   .when { font-variant-numeric: tabular-nums; }
+  .where { color: var(--muted); }
+  .points { margin: 8px 0 0; padding-left: 1.15em; color: var(--muted); }
+  .points li { padding-left: 0.2em; }
+  .points li + li { margin-top: 6px; }
+  .points li::marker { color: var(--accent); }
 
   @media (max-width: 800px) {
-    li, .dated li { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; }
+    .meta { flex-direction: row; flex-wrap: wrap; gap: 0 8px; }
+    .where::before { content: '·'; margin-right: 8px; }
   }
 </style>

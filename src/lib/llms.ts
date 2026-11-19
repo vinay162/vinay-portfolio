@@ -117,7 +117,18 @@ export async function buildLlmsFullTxt(origin: URL): Promise<string> {
     '',
     '# Experience',
     '',
-    ...site.experience.map((item) => `- ${item.when}: ${item.title}. ${item.text}`),
+    ...site.experience.flatMap((item) => [
+      `- ${item.when}, ${item.where}: ${item.title}`,
+      ...item.points.map((point) => `  - ${point}`),
+    ]),
+    '',
+    '# Skills',
+    '',
+    ...site.skills.map((item) => `- ${item.title}: ${item.text}`),
+    '',
+    '# Education',
+    '',
+    ...site.education.map((item) => `- ${item.when}, ${item.where}: ${item.title}. ${item.text}`),
     '',
   ].join('\n');
 }
