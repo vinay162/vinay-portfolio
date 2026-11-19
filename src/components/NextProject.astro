@@ -13,12 +13,12 @@ const { next, outside } = Astro.props;
 <nav class="band-ink next" aria-label="More projects">
   <div class="wrap">
     <div>
-      <span>{next ? 'Next project' : 'More'}</span>
+      <span>{next ? 'Go to the next project' : 'See more'}</span>
       <a class="heading onward" href={next ? next.href : '/#projects'}>{next ? next.title : 'All projects'}</a>
     </div>
     {outside && (
       <div>
-        <span>Elsewhere</span>
+        <span>Open this project on</span>
         <a class="heading" href={outside.url} target="_blank" rel="noopener">{outside.label}</a>
       </div>
     )}
