@@ -51,11 +51,37 @@ Add one Markdown file to `src/content/projects/` following `lore.md`. Set
 is added to `llms.txt` and the sitemap automatically.
 
 - `figures`: one or two real, measured results. Never pad with a status
-  ("Live") or a setting ("10 min") just to fill the second slot.
+  ("Live") or a setting ("10 min") just to fill the second slot. They show
+  on the home page card and again at the top of the project page, as key
+  results.
 - `ongoing: true` adds an "Ongoing" pill and an accent border, for work
   still in active development.
 - Text above the first `##` heading, or a `flow` diagram without a
   `## How it works` section, fails the build on purpose.
+
+## Visitor test (run for every change or addition)
+
+Before shipping, walk the change through as each kind of visitor and ask
+what they would try: a lazy skimmer (taps titles, cards, figures), an
+impatient recruiter landing on a deep link (needs resume, contact and the
+way back from every page), a reader at the end of a page (needs a next
+step), a cautious clicker (needs to see which links leave the site), a
+phone user at 390px (no sideways scroll, no clipped text, no wasted
+header lines), a keyboard or screen-reader user (visible focus, link text
+that makes sense on its own), and a skeptical engineer (code, store and
+demo links easy to find). Then check it in a real browser: the build,
+phone and desktop screenshots, and, for anything clickable, where clicks
+actually land.
+
+Patterns already in place, so keep them working:
+- Project cards open their page from anywhere on the card. The title is
+  the only real link, stretched over the card with `::after`; other links
+  in the card sit above it with `position: relative; z-index: 1`.
+- Text links with `target="_blank"` get a ↗ from `base.css`. Add
+  `class="no-arrow"` for image links.
+- Resume (PDF) is in the header on every page. Project pages end with
+  email, LinkedIn, GitHub and resume links.
+- Tables have no minimum width, so they wrap on phones.
 
 ## Link preview image
 
