@@ -80,7 +80,7 @@ export const site = {
     {
       when: 'May 2024 to now',
       title: "Software Developer, Founders' Office, Spoton Fintech",
-      text: 'Mumbai. Apps for clients, from first requirements to app-store release.',
+      text: "Mumbai. Mobile and web apps for the company's clients, covering the app screens, the backend, AI features and app-store releases. Sole developer of Buddy Up Network on iOS and Android since launch, including its search speed-up and AI support assistant. Also the travel document reader and pipeline monitoring app listed under Other work.",
     },
     {
       when: 'Jan to Apr 2024',
@@ -97,6 +97,16 @@ export const site = {
       title: 'The Lawrence School, Lovedale',
       text: 'Schooling, Nilgiris.',
     },
+  ],
+
+  // Copied word for word from the resume's skills block. Keep the two
+  // identical: change the resume first, then this.
+  skills: [
+    { title: 'AI / GenAI', text: 'RAG, Hybrid Retrieval, BM25, Vector Search, Reciprocal Rank Fusion (RRF), Cross-Encoder Re-ranking, LLM APIs, OpenAI API, Ollama' },
+    { title: 'Languages', text: 'Python, TypeScript, JavaScript, SQL, Dart' },
+    { title: 'Backend', text: 'FastAPI, REST APIs, PostgreSQL, Supabase, Firebase, Firestore, MySQL, Cloud Functions' },
+    { title: 'Frontend / Mobile', text: 'React, Flutter' },
+    { title: 'Cloud / DevOps', text: 'Google Cloud Platform (GCP), Docker, GitHub Actions, Git' },
   ],
 
   // Move an entry out of here once its file exists in src/content/projects/.
