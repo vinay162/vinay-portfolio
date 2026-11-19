@@ -6,7 +6,11 @@ Guidance for working in this repository. This repo is public.
 
 Vinay Purohit's portfolio: a static site built with Astro. Plain HTML and
 CSS, no client-side JavaScript, no UI framework. Vercel deploys the `main`
-branch to production and builds a preview for every other branch.
+branch to production at https://vinaypurohit.vercel.app.
+
+Workflow: edit on `redesign`, run `npm run build` (it must print `OK`),
+commit, fast-forward `main` to `redesign`, push both, then check the live
+site. Changes go straight to production; there is no preview step.
 
 ## Commands
 
@@ -41,6 +45,20 @@ Add one Markdown file to `src/content/projects/` following `lore.md`. Set
 `order` to place it. It appears on the home page, gets its own page, and
 is added to `llms.txt` and the sitemap automatically.
 
+- `figures`: one or two real, measured results. Never pad with a status
+  ("Live") or a setting ("10 min") just to fill the second slot.
+- `ongoing: true` adds an "Ongoing" pill and an accent border, for work
+  still in active development.
+- Text above the first `##` heading, or a `flow` diagram without a
+  `## How it works` section, fails the build on purpose.
+
+## Link preview image
+
+`public/og-2.png` is generated from `scripts/og-image.html` (instructions
+at the top of that file). Keep everything in the centre square, because
+some apps crop it. When it changes, give it a new name (`og-3.png`) and
+update `src/layouts/Base.astro`, so apps fetch the new one.
+
 ## Rules
 
 - Every fact on the site must be true and already agreed with Vinay. Do
@@ -49,5 +67,13 @@ is added to `llms.txt` and the sitemap automatically.
   dashes.
 - The orange accent (`--pop`) appears only on navy bands: one main button
   per page, the email underline, the next-project underline.
+- Public site: no client or employer internal data. No money figures
+  (the build fails on any dollar amount), no usage counts that are not
+  already public, no internal tools or processes. Engineering results
+  (percentages, latency, test results) are fine.
+- Outside links and the resume open in a new tab; links within the site
+  do not.
+- Write text containing a dollar sign with an editor, never through a
+  double-quoted shell string: the shell expands it.
 - The site must work with JavaScript disabled.
 - Keep it accessible: real alt text, visible focus, readable contrast.
