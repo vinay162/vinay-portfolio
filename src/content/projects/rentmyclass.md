@@ -1,6 +1,6 @@
 ---
 title: rentmyclass
-order: 3
+order: 2
 summary: "Classroom booking app with Razorpay payments. Built solo for a freelance client: Android app, backend and admin dashboard. Two people cannot book the same slot, and unpaid bookings are cancelled automatically."
 stack: Flutter, Supabase (PostgreSQL), Razorpay, React.
 facts:

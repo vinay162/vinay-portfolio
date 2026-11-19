@@ -76,20 +76,21 @@ export const site = {
     },
   ],
 
-  // Bullets: start with an action verb, present tense for ongoing work and
-  // past tense for finished results, no full stops. Location sits under the
-  // date, so the bullets carry only what the work was.
+  // Bullets: past-tense action verbs or noun phrases, same voice as the
+  // resume. Never present-tense "-s" verbs ("Builds", "Maintains"): they
+  // read as third person ("he builds"). No full stops. Location sits under
+  // the date, so the bullets carry only what the work was.
   experience: [
     {
       when: 'May 2024 to now',
       where: 'Mumbai',
       title: "Software Developer, Founders' Office, Spoton Fintech",
       points: [
-        "Builds mobile and web apps for the company's clients, covering app screens, backend, AI features and app-store releases",
-        'Maintains Buddy Up Network on iOS and Android as its sole developer since launch',
+        "Built mobile and web apps for the company's clients, covering app screens, backend, AI features and app-store releases",
+        'Sole developer of Buddy Up Network on iOS and Android since launch',
         "Cut Buddy Up Network's search time from 8 to 15 s down to 1 to 2.5 s by moving the search from the phone to the server",
-        "Built the app's AI support assistant, including a three-layer safety check, monitoring and rate limiting",
-        'Built a travel document reader (React, Supabase) and a Bluetooth pipeline monitoring app (Flutter) for other clients',
+        "Shipped the app's AI support assistant, including a three-layer safety check, monitoring and rate limiting",
+        'Developed a travel document reader (React, Supabase) and a Bluetooth pipeline monitoring app (Flutter) for other clients',
       ],
     },
     {
