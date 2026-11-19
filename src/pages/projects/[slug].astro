@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, next } = Astro.props;
-const { title, summary, facts, links, screenshot, flow, ongoing } = entry.data;
+const { title, summary, facts, links, screenshot, flow, ongoing, figures } = entry.data;
 const sections = splitSections(entry.rendered?.html ?? '', entry.id);
 if (flow && !sections.some((section) => section.title === 'How it works')) {
   throw new Error(entry.id + ': a flow diagram needs a section titled "## How it works" to sit under');
@@ -44,6 +44,16 @@ const primary = links.find((link) => link.primary) ?? links[0];
         {ongoing && <span class="pill">Ongoing</span>}
         <h1 class="display">{title}</h1>
         <p class="lede">{summary}</p>
+        {/* The headline results up front, the same figures as the home page
+            card, for a visitor who will not scroll to Results. */}
+        <ul class="glance" aria-label="Key results">
+          {figures.map((figure) => (
+            <li>
+              <span class="glance-value">{figure.value}</span>
+              <span class="glance-label">{figure.label}</span>
+            </li>
+          ))}
+        </ul>
         {primary && (
           <div class="actions">
             <a class="btn btn-pop" href={primary.url} target="_blank" rel="noopener">{primary.cta ?? primary.label}</a>
@@ -116,6 +126,18 @@ const primary = links.find((link) => link.primary) ?? links[0];
   .pill { margin-left: 14px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--on-ink-muted); color: var(--on-ink); font-size: 0.8125rem; font-weight: 600; }
   h1 { margin: 18px 0 0; font-size: clamp(3rem, 9vw, 6rem); }
   .lede { max-width: 54ch; margin: 22px 0 0; font-size: 1.25rem; line-height: 1.5; color: var(--on-ink-muted); }
+  .glance { display: flex; flex-wrap: wrap; gap: 20px 56px; margin: 30px 0 0; padding: 0; list-style: none; }
+  .glance li { max-width: 17rem; }
+  .glance-value {
+    display: block;
+    font-size: 2.25rem;
+    font-weight: 650;
+    font-stretch: 80%;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .glance-label { display: block; margin-top: 6px; color: var(--on-ink-muted); font-size: 0.9375rem; line-height: 1.4; }
   .actions { margin-top: 30px; }
   .facts {
     display: grid;
@@ -149,6 +171,9 @@ const primary = links.find((link) => link.primary) ?? links[0];
     .title-block { padding: 16px 0 52px; }
     .title-block.has-shot { padding-bottom: 84px; }
     .lede { font-size: 1.0625rem; }
+    .glance { gap: 18px 28px; margin-top: 24px; }
+    .glance li { flex: 1 1 8.5rem; }
+    .glance-value { font-size: 1.75rem; }
     .facts { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
     .shot { margin-top: -56px; }
     .section { padding: 52px 0 60px; }
@@ -166,7 +191,9 @@ const primary = links.find((link) => link.primary) ?? links[0];
   .project-page .prose small { color: var(--muted); font-size: 0.9375rem; }
 
   .project-page .table-wrap { margin: 8px 0 16px; overflow-x: auto; }
-  .project-page table { width: 100%; min-width: 30rem; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  /* No minimum width: on a phone the cells wrap, so every word stays in
+     view. The wrapper still scrolls if a table ever truly cannot fit. */
+  .project-page table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
   .project-page th,
   .project-page td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
   .project-page th { color: var(--muted); font-size: 0.9375rem; font-weight: 500; }
@@ -175,4 +202,13 @@ const primary = links.find((link) => link.primary) ?? links[0];
   .project-page th[style*="right"],
   .project-page td[style*="right"] { padding-right: 28px; text-align: right; }
   .project-page td small { display: block; }
+
+  @media (max-width: 800px) {
+    .project-page th,
+    .project-page td { padding-right: 10px; }
+    .project-page th[align="right"],
+    .project-page td[align="right"],
+    .project-page th[style*="right"],
+    .project-page td[style*="right"] { padding-right: 0; padding-left: 10px; }
+  }
 </style>
