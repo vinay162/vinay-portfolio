@@ -30,7 +30,11 @@ npm run check    # run the dist checks on their own
   anywhere else.
 - `src/styles/base.css`: shared foundations (bands, buttons, type).
 - `src/data/site.ts`: name, role, intro, contact links, Other work,
-  Experience.
+  Experience, Skills, Education. Experience entries are bullet `points`
+  (start with an action verb, present tense for ongoing work, past tense
+  for finished results, no full stops) with the location in `where`,
+  shown under the date, never inside the bullets. Skills copy the
+  resume's skills block word for word.
 - `src/content/projects/*.md`: one file per project. The header block
   holds the summary, links, figures and diagram steps; the body holds the
   sections (`## Problem`, `## How it works`, `## Key decisions`,
